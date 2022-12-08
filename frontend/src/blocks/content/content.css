@@ -1,0 +1,15 @@
+.content {
+  padding-top: 40px;
+  max-width: 880px;
+  min-width: 320px;
+  width: 100%;
+  min-height: 65vh;
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 950px) {
+  .content {
+  padding-top: 42px;
+  }
+}

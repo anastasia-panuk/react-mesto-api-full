@@ -1,0 +1,17 @@
+.user {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 50px;
+}
+
+@media screen and (max-width: 950px) {
+  .user {
+  width: 90%;
+  align-self: center;
+  flex-direction: column;
+  padding-bottom: 36px;
+  }
+}

@@ -1,0 +1,14 @@
+.welcome__loggin-text {
+    font-weight: 400;
+font-size: 18px;
+line-height: 22px;
+color: white;
+text-decoration: none;
+}
+
+@media screen and (max-width: 950px) {
+    .welcome__loggin-text {
+        font-size: 14px;
+        line-height: 17px;
+    }
+  }

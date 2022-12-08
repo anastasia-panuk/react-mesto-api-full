@@ -1,0 +1,38 @@
+{
+  "name": "express-mesto-gha",
+  "version": "1.0.0",
+  "description": "[![Tests](../../actions/workflows/tests-13-sprint.yml/badge.svg)](../../actions/workflows/tests-13-sprint.yml) [![Tests](../../actions/workflows/tests-14-sprint.yml/badge.svg)](../../actions/workflows/tests-14-sprint.yml)\r # Проект Mesto фронтенд + бэкенд",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "lint": "npx eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anastasia-panuk/express-mesto-gha.git"
+  },
+  "author": "Anastasia Panuk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anastasia-panuk/express-mesto-gha/issues"
+  },
+  "homepage": "https://github.com/anastasia-panuk/express-mesto-gha#readme",
+  "devDependencies": {
+    "eslint": "^8.26.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "celebrate": "^15.0.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-winston": "^4.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.7.1",
+    "validator": "^13.7.0",
+    "winston": "^3.8.2"
+  }
+}

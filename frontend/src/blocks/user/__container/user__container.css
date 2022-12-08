@@ -1,0 +1,16 @@
+.user__container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  max-width: 580px;
+  width: 100%;
+  padding-left: 30px;
+}
+
+@media screen and (max-width: 950px) {
+  .user__container {
+    padding: 26px 0 26px;
+    align-items: center;
+    row-gap: 14px;
+  }
+}

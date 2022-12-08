@@ -1,0 +1,11 @@
+.footer__copyright {
+  color: #545454;
+  font-size: calc(14px + 4*(100vw - 320px)/960);
+  margin: 0;
+}
+
+@media screen and (min-width: 1281px) {
+  .footer__copyright {
+    font-size: 18px;
+  }
+}

@@ -1,0 +1,28 @@
+.user__avatar-edit-button {
+  position: absolute;
+  background-image: url(../../../images/edit_btn.svg);
+  background-size: 26px 26px;
+  height: 100%;
+  width: 100%;
+  /*border-radius: 50%;*/
+  background-repeat: no-repeat;
+  background-position: center;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+  z-index: 3;
+  cursor: pointer;
+  background-color: rgb(0, 0, 0, 0);
+  outline: none;
+  opacity: 0;
+  transition: .2s;
+}
+
+.user__avatar-edit-button:hover {
+  background-color: rgb(0, 0, 0, .8);
+  opacity: 1;
+  transform: scale(1.05, 1.05);
+}

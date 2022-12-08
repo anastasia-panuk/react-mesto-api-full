@@ -1,0 +1,7 @@
+.infoTooltip__container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    max-width: 358px;
+    align-self: center;
+}

@@ -1,0 +1,6 @@
+.popup__container_image {
+  background: unset;
+  min-height: fit-content;
+  max-width: fit-content;
+  box-shadow: none;
+}

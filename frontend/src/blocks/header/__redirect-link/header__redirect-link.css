@@ -1,0 +1,23 @@
+.header__redirect-link {
+text-decoration: none;
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 22px;
+text-align: right;
+color: #FFFFFF;
+transition: .2s;
+}
+
+.header__redirect-link:hover {
+    cursor: pointer;
+    opacity: .6;
+}
+
+@media screen and (max-width: 950px) {
+    .header__redirect-link {
+        font-size: 14px;
+        line-height: 17px;
+        padding-right: 30px;
+    }
+  }

@@ -1,0 +1,10 @@
+.infoTooltip__img {
+    width: 120px;
+    padding: 60px 0 32px;
+}
+
+@media screen and (max-width: 385px) { */
+    .infoTooltip__img {
+        padding: 50px 0 40px;
+    }
+  } 

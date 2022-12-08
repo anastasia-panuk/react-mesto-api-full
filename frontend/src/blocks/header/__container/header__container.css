@@ -1,0 +1,12 @@
+.header__container {
+    display: flex;
+    column-gap: 24px;
+    align-items: center;
+}
+
+@media screen and (max-width: 950px) {
+    .header__container {
+        flex-direction: column;
+        padding-right: 30px;
+    }
+  }

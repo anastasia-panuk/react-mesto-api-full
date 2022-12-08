@@ -1,0 +1,30 @@
+.user__add-button {
+  background-image: url(../../../images/add_button.svg);
+  width: 150px;
+  height: 50px;
+  background-color: unset;
+  outline: none;
+  border: 2px solid #fff;
+  box-sizing: border-box;
+  border-radius: 2px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 22px 22px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+
+
+@media screen and (max-width: 950px) {
+  .user__add-button {
+    max-width: 282px;
+    width: 100%;
+    background-size: 16px 16px;
+  }
+}
+
+.user__add-button:hover {
+  opacity: .6;
+  transform: scale(1.01, 1.01);
+}

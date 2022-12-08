@@ -1,0 +1,22 @@
+.card__trash-button {
+  background-image: url(../../../images/Trash.svg);
+  background-size: contain;
+  background-color: unset;
+  background-repeat: no-repeat;
+  outline: none;
+  width: 18px;
+  height: 19.3px;
+  top: 20px;
+  right: 20px;
+  position: absolute;
+  z-index: 1;
+  border: none;
+  cursor: pointer;
+  transition: .2s;
+}
+
+
+.card__trash-button:hover {
+  opacity: .6;
+  transform: scale(1.05, 1.05);
+}

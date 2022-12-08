@@ -1,0 +1,16 @@
+.welcome {
+    padding-top: 60px;
+    max-width: 880px;
+    min-width: 320px;
+    width: 100%;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  @media screen and (max-width: 950px) {
+    .welcome {
+    padding-top: 40px;
+    }
+  }

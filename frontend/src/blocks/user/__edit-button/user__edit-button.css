@@ -1,0 +1,26 @@
+.user__edit-button {
+  width: 24px;
+  height: 24px;
+  background-color: unset;
+  background-image: url(../../../images/edit_btn.svg);
+  background-size: 10px 10px;
+  border: 1px solid #fff;
+  background-position: center;
+  padding: 0;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  outline: none;
+  transition: .2s;
+}
+
+@media screen and (max-width: 950px) {
+  .user__edit-button {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.user__edit-button:hover {
+  opacity: .6;
+  transform: scale(1.05, 1.05);
+}
