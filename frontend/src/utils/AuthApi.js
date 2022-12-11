@@ -1,4 +1,4 @@
-const serverUrl = "https://auth.nomoreparties.co";
+const serverUrl = "http://localhost:3001";
 
 export const requestResult = ({
   url,
@@ -33,13 +33,5 @@ export const userAuthorization = (password, email) => {
   return requestResult({
     url: "/signin",
     data: { password, email },
-  });
-};
-
-export const getToken = (token) => {
-  return requestResult({
-    url: "/users/me",
-    method: "GET",
-    token,
   });
 };

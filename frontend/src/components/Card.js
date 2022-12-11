@@ -12,15 +12,17 @@ function Card({
 }) {
   const user = React.useContext(CurrentUserContext);
   const isOwn = card.owner._id === user._id;
-  const isLiked = card.likes.some((i) => i._id === user._id);
+  const isLiked = card.likes.some(id => id._id === user._id);
 
-  const cardDeleteButtonClassName = `${
-    isOwn ? "card__trash-button" : "card__trash-button_invisible"
-  }`;
+  const cardDeleteButtonClassName = 
+    `${isOwn ? 'card__trash-button' : 'card__trash-button_invisible'}`
 
-  const cardLikeButtonClassName = `${
-    !isLiked ? "card__like-button" : "card__like-button_active"
-  }`;
+  // const cardDeleteButtonClassName = `${
+  //   isOwn ? "card__trash-button" : "card__trash-button_invisible"
+  // }`;
+
+  const cardLikeButtonClassName = `${!isLiked ? 'card__like-button' : 'card__like-button_active'}`
+  //  !isLiked ? "card__like-button" : "card__like-button_active";
 
   function handleClick() {
     onCardClick(card);

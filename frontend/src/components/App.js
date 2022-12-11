@@ -13,7 +13,6 @@ import api from "../utils/Api";
 import {
   userAuthorization,
   userAutentification,
-  getToken,
 } from "../utils/AuthApi";
 import Register from "./Register";
 import Login from "./Login";
@@ -41,24 +40,8 @@ function App() {
   const history = useHistory();
 
   React.useEffect(() => {
-    const initialData = [
-      api.getUserInfoFromServer(currentUser),
-      api.getCardsFromServer(),
-    ];
-
-    Promise.all(initialData)
-      .then(([user, cards]) => {
-        setCurrentUser(user);
-        setCards(cards);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
-  React.useEffect(() => {
     checkToken();
-  }, [history]);
+  }, [loggedIn]);
 
   React.useEffect(() => {
     if (
@@ -100,8 +83,8 @@ function App() {
     api
       .changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
-        setCards((state) =>
-          state.map((c) => (c._id === card._id ? newCard : c))
+        setCards((cardFromServer) =>
+        cardFromServer.map((c) => (c._id === card._id ? newCard : c))
         );
       })
       .catch((err) => console.log(err));
@@ -174,14 +157,23 @@ function App() {
 
   const checkToken = () => {
     const jwt = localStorage.getItem("jwt");
+    api.setToken(jwt)
 
-    if (jwt) {
-      getToken(jwt)
-        .then((res) => {
-          setLoggedIn(true);
-          setEmail(res.data.email);
-          history.push("/main");
-        })
+    if (!jwt) return;
+    Promise.all([api.getUserInfoFromServer(),
+    api.getCardsFromServer(),
+    ])
+      .then(([user, cards]) => {
+        if(user && user.email) {
+        setCurrentUser(user);
+        setCards(cards.reverse());
+        setLoggedIn(true);
+        setEmail(user.email);
+        history.push("/main");
+      } else {
+      handleLogout();
+    }
+  })
         .catch((err) => {
           if (err === 400) {
             console.log(
@@ -192,7 +184,6 @@ function App() {
           }
         });
     }
-  };
 
   function handleLogout() {
     localStorage.removeItem("jwt");

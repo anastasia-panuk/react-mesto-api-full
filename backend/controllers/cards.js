@@ -20,9 +20,20 @@ module.exports.getCards = (req, res, next) => {
 
 module.exports.createCards = (req, res, next) => {
   const { name, link } = req.body;
+  // const owner = {
+  //   _id: req.user._id,
+  //   about: req.user.about,
+  //   avatar: req.user.avatar,
+  //   email: req.user.email,
+  //   name: req.user.name,
+  // };
 
   Card.create({ name, link, owner: req.user._id })
-    .then((card) => res.status(CREATED_STATUS).send(card))
+    .then((document) => {
+      const card = document.toObject();
+      card.owner = { _id: req.user._id };
+      res.status(CREATED_STATUS).send(card);
+    })
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new BadRequestError({ message: 'Переданы некорректные данные при создании карточки.' }));
@@ -64,7 +75,7 @@ module.exports.putLikes = (req, res, next) => {
       new: true,
       runValidators: true,
     },
-  )
+  ).populate(['owner', 'likes'])
     .then((card) => {
       if (card === null) {
         throw new NotFoundError('Передан несуществующий _id карточки.');
@@ -90,7 +101,7 @@ module.exports.deleteLikes = (req, res, next) => {
       new: true,
       runValidators: true,
     },
-  )
+  ).populate(['owner', 'likes'])
     .then((card) => {
       if (card === null) {
         throw new NotFoundError('Передан несуществующий _id карточки.');

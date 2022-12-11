@@ -1,7 +1,7 @@
 class Api {
   constructor(data) {
     this._serverUrl = data.serverUrl;
-    this._token = data.token;
+    this._headers = data.headers;
   }
 
   _requestResult(res) {
@@ -14,27 +14,20 @@ class Api {
 
   getUserInfoFromServer() {
     return fetch(`${this._serverUrl}/users/me`, {
-      headers: {
-        authorization: this._token,
-      },
+      headers: this._headers,
     }).then((res) => this._requestResult(res));
   }
 
   getCardsFromServer() {
     return fetch(`${this._serverUrl}/cards`, {
-      headers: {
-        authorization: this._token,
-      },
+      headers: this._headers,
     }).then((res) => this._requestResult(res));
   }
 
   editUserInfo(data) {
     return fetch(`${this._serverUrl}/users/me`, {
       method: "PATCH",
-      headers: {
-        authorization: this._token,
-        "Content-Type": "application/json",
-      },
+      headers: this._headers,
 
       body: JSON.stringify({
         name: data.name,
@@ -46,10 +39,7 @@ class Api {
   editUserAvatar(data) {
     return fetch(`${this._serverUrl}/users/me/avatar`, {
       method: "PATCH",
-      headers: {
-        authorization: this._token,
-        "Content-Type": "application/json",
-      },
+      headers: this._headers,
 
       body: JSON.stringify({
         avatar: data.avatar,
@@ -60,10 +50,7 @@ class Api {
   addNewCard(data) {
     return fetch(`${this._serverUrl}/cards`, {
       method: "POST",
-      headers: {
-        authorization: this._token,
-        "Content-Type": "application/json",
-      },
+      headers: this._headers,
 
       body: JSON.stringify({
         name: data.name,
@@ -72,29 +59,38 @@ class Api {
     }).then((res) => this._requestResult(res));
   }
 
-  changeLikeCardStatus(card, likeCardStatus) {
-    return fetch(`${this._serverUrl}/cards/${card}/likes/`, {
-      method: likeCardStatus ? "PUT" : "DELETE",
-      headers: {
-        authorization: this._token,
-      },
+  changeLikeCardStatus(_id, likeCardStatus) {
+    if(likeCardStatus) {
+    return fetch(`${this._serverUrl}/cards/${_id}/likes`, {
+      method: "PUT",
+      headers: this._headers,
     }).then((res) => this._requestResult(res));
-  }
-
-  deleteCard(_id) {
-    return fetch(`${this._serverUrl}/cards/${_id}`, {
+  } else {
+    return fetch(`${this._serverUrl}/cards/${_id}/likes`, {
       method: "DELETE",
-      headers: {
-        authorization: this._token,
-        "Content-Type": "application/json",
-      },
+      headers: this._headers,
     }).then((res) => this._requestResult(res));
   }
 }
 
+  deleteCard(_id) {
+    return fetch(`${this._serverUrl}/cards/${_id}`, {
+      method: "DELETE",
+      headers: this._headers,
+    }).then((res) => this._requestResult(res));
+  }
+
+  setToken(token) {
+    this._headers.authorization = token;
+  }
+}
+
 const api = new Api({
-  serverUrl: "https://mesto.nomoreparties.co/v1/cohort-48",
-  token: "628877ed-b851-464f-b36a-d22d6951fc4a",
+  serverUrl: "http://localhost:3001",
+  headers: {
+    authorization: '',
+    "Content-Type": "application/json",
+  },
 });
 
 export default api;
