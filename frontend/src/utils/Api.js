@@ -86,7 +86,7 @@ class Api {
 }
 
 const api = new Api({
-  serverUrl: "http://localhost:3001",
+  serverUrl: "api.panuk.students.nomoredomains.club",
   headers: {
     authorization: '',
     "Content-Type": "application/json",
