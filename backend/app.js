@@ -1,9 +1,6 @@
 const express = require('express');
-// const dotenv = require('dotenv');
-// require('dotenv').config();
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
-// const { path } = require('path');
 const cors = require('cors');
 const {
   INTERNAL_SERVER_ERR,
@@ -19,10 +16,6 @@ const { bodyUser, bodyAuth } = require('./validators/user');
 const { PORT = 3001, DB_CONN = 'mongodb://localhost:27017/mestodb' } = process.env;
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-// const config = dotenv.config({
-//   path: NODE_ENV === 'production' ? '.env' : '.env.common',
-// }).parsed;
-
 const app = express();
 app.use(express.json());
 app.use(cors({
@@ -30,37 +23,15 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
-// const allowedCors = [
-//   'https://api.panuk.students.nomoredomains.club',
-//   'https://panuk.students.nomoredomains.club',
-//   'localhost:3001',
-//   'localhost:3000',
-// ];
-
-// app.use((req, res, next) => {
-//   const { origin } = req.headers;
-//   if (allowedCors.includes(origin)) {
-//     res.header('Access-Control-Allow-Origin', origin);
-//   }
-//   const { method } = req;
-//   const ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
-
-//   const requestHeaders = req.headers['access-control-request-headers'];
-
-//   if (method === 'OPTIONS') {
-//     res.header('Access-Control-Allow-Methods', ALLOWED_METHODS);
-//     res.header('Access-Control-Allow-Headers', requestHeaders);
-//     res.end();
-//   }
-
-//   next();
-// });
-
-// app.set('config', config);
-
 mongoose.connect(DB_CONN);
 
 app.use(requestLogger);
+
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 
 app.post('/signin', bodyAuth, login);
 app.post('/signup', bodyUser, createUsers);
