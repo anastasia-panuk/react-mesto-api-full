@@ -33,18 +33,17 @@ app.use(express.json());
 const allowedCors = [
   'https://api.panuk.students.nomoredomains.club',
   'https://panuk.students.nomoredomains.club',
-  'https://localhost:3001',
-  'https://localhost:3000',
+  'localhost:3001',
+  'localhost:3000',
 ];
 
 app.use((req, res, next) => {
   const { origin } = req.headers;
   if (allowedCors.includes(origin)) {
     res.header('Access-Control-Allow-Origin', origin);
-    res.header('Access-Control-Allow-Credentials', true);
   }
   const { method } = req;
-  const ALLOWED_METHODS = 'GET, HEAD, PUT, PATCH, POST, DELETE';
+  const ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
 
   const requestHeaders = req.headers['access-control-request-headers'];
 
