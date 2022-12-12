@@ -1,4 +1,4 @@
-const serverUrl = "http://localhost:3001";
+const serverUrl = "http://api.panuk.students.nomoredomains.club";
 
 export const requestResult = ({
   url,
