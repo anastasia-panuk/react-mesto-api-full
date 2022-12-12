@@ -1,4 +1,4 @@
-const serverUrl = "http://api.panuk.students.nomoredomains.club";
+const serverUrl = "https://api.panuk.students.nomoredomains.club";
 
 export const requestResult = ({
   url,

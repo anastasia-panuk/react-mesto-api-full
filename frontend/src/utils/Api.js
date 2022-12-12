@@ -86,7 +86,7 @@ class Api {
 }
 
 const api = new Api({
-  serverUrl: "http://api.panuk.students.nomoredomains.club",
+  serverUrl: "https://api.panuk.students.nomoredomains.club",
   headers: {
     authorization: '',
     "Content-Type": "application/json",
