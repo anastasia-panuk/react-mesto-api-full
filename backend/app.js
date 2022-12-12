@@ -4,7 +4,7 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 // const { path } = require('path');
-const cors = require('cors');
+// const cors = require('cors');
 const {
   INTERNAL_SERVER_ERR,
 } = require('./utils/constants/constants');
@@ -25,10 +25,35 @@ const config = dotenv.config({
   path: NODE_ENV === 'production' ? '.env' : '.env.common',
 }).parsed;
 
-app.use(cors({
-  origin: '*',
-  allowedHeaders: ['Content-Type', 'Authorization'],
-}));
+// app.use(cors({
+//   origin: '*',
+//   allowedHeaders: ['Content-Type', 'Authorization'],
+// }));
+
+const allowedCors = [
+  'https://api.panuk.students.nomoredomains.club',
+  'https://panuk.students.nomoredomains.club',
+  'localhost:3001',
+];
+
+app.use((req, res, next) => {
+  const { origin } = req.headers;
+  if (allowedCors.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+  }
+  const { method } = req;
+  const ALLOWED_METHODS = 'GET, HEAD, PUT, PATCH, POST, DELETE';
+
+  const requestHeaders = req.headers['access-control-request-headers'];
+
+  if (method === 'OPTIONS') {
+    res.header('Access-Control-Allow-Methods', ALLOWED_METHODS);
+    res.header('Access-Control-Allow-Headers', requestHeaders);
+    res.end();
+  }
+
+  next();
+});
 
 app.set('config', config);
 
