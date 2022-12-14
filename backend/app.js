@@ -1,5 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+require('dotenv').config();
 const { errors } = require('celebrate');
 const cors = require('cors');
 const {
@@ -13,10 +15,17 @@ const {
 } = require('./controllers/users');
 const { bodyUser, bodyAuth } = require('./validators/user');
 
-const { PORT = 3001, DB_CONN = 'mongodb://localhost:27017/mestodb' } = process.env;
+const { PORT = 3001, DB_CONN = 'mongodb://localhost:27017/mestodb', NODE_ENV } = process.env;
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const app = express();
+
+const config = dotenv.config({
+  path: NODE_ENV === 'production' ? '.env' : '.env.common',
+}).parsed;
+
+app.set('config', config);
+
 app.use(express.json());
 app.use(cors({
   origin: '*',
