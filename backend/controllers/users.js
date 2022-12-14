@@ -1,4 +1,3 @@
-// require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const User = require('../models/user');
@@ -10,8 +9,6 @@ const {
   CREATED_STATUS,
   UNIQUE_ERR,
 } = require('../utils/constants/constants');
-
-// const { NODE_ENV, JWT_SECRET } = process.env;
 
 module.exports.getUsers = (req, res, next) => {
   User.find({}).then((users) => res.send(users))
