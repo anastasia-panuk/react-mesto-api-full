@@ -24,13 +24,14 @@ const config = dotenv.config({
   path: NODE_ENV === 'production' ? '.env' : '.env.common',
 }).parsed;
 
-app.set('config', config);
-
-app.use(express.json());
 app.use(cors({
   origin: '*',
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
+
+app.set('config', config);
+
+app.use(express.json());
 
 mongoose.connect(DB_CONN);
 
