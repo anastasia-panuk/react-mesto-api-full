@@ -68,7 +68,7 @@ app.use(errorLogger);
 app.use(errors());
 app.use((err, req, res, next) => {
   const status = err.statusCode || INTERNAL_SERVER_ERR;
-  const message = status === INTERNAL_SERVER_ERR ? 'Ошибка сервера' : err.message;
+  const message = status === INTERNAL_SERVER_ERR ? err.message : err.message;
   res.status(status).send({ message });
   next();
 });
