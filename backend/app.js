@@ -18,6 +18,12 @@ const { bodyUser, bodyAuth } = require('./validators/user');
 const { PORT = 3001, DB_CONN = 'mongodb://localhost:27017/mestodb', NODE_ENV } = process.env;
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
+const app = express();
+
+const config = dotenv.config({
+  path: NODE_ENV === 'production' ? '.env' : '.env.common',
+}).parsed;
+
 const allowedCors = [
   'https://api.panuk.students.nomoredomains.club',
   'http://api.panuk.students.nomoredomains.club',
@@ -25,12 +31,6 @@ const allowedCors = [
   'http://panuk.students.nomoredomains.club',
   'localhost:3001',
 ];
-
-const app = express();
-
-const config = dotenv.config({
-  path: NODE_ENV === 'production' ? '.env' : '.env.common',
-}).parsed;
 
 app.use(cors({
   origin: allowedCors,
