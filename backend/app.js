@@ -18,30 +18,22 @@ const { bodyUser, bodyAuth } = require('./validators/user');
 const { PORT = 3001, DB_CONN = 'mongodb://localhost:27017/mestodb', NODE_ENV } = process.env;
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const allowedCors = [
-  'https://api.panuk.students.nomoredomains.club',
-  'http://api.panuk.students.nomoredomains.club',
-  'https://panuk.students.nomoredomains.club',
-  'http://panuk.students.nomoredomains.club',
-  'localhost:3001',
-];
-
 const app = express();
 
 const config = dotenv.config({
-  path: NODE_ENV === 'production' ? '.env' : '.env.common',
+  path: NODE_ENV === 'production' ? '.env' : '.env.common.env',
 }).parsed;
 
-app.use(cors({
-  origin: allowedCors,
-  allowedHeaders: ['Content-Type', 'Authorization'],
-}));
+mongoose.connect(DB_CONN);
 
 app.set('config', config);
 
-app.use(express.json());
+app.use(cors({
+  origin: '*',
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
 
-mongoose.connect(DB_CONN);
+app.use(express.json());
 
 app.use(requestLogger);
 
@@ -68,7 +60,7 @@ app.use(errorLogger);
 app.use(errors());
 app.use((err, req, res, next) => {
   const status = err.statusCode || INTERNAL_SERVER_ERR;
-  const message = status === INTERNAL_SERVER_ERR ? err.message : err.message;
+  const message = status === INTERNAL_SERVER_ERR ? 'Ошибка сервера' : err.message;
   res.status(status).send({ message });
   next();
 });
