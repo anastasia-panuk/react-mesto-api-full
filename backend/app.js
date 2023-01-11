@@ -20,6 +20,12 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const app = express();
 
+const allowedURL = [
+  'https://panuk.students.nomoredomains.club',
+  'https://api.panuk.students.nomoredomains.club',
+  'https://localhost:3001',
+];
+
 const config = dotenv.config({
   path: NODE_ENV === 'production' ? '.env' : '.env.common.env',
 }).parsed;
@@ -29,7 +35,7 @@ mongoose.connect(DB_CONN);
 app.set('config', config);
 
 app.use(cors({
-  origin: '*',
+  origin: allowedURL,
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
